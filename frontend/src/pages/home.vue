@@ -1,15 +1,19 @@
 <template>
     <div class="h-screen bg-gradient-to-b from-primary-700/30 to-white">
         <MyHeader />
-            <div class="grid grid-cols-1 place-items-center w-5/6 mx-auto h-5/6 md:grid-cols-2">
-                <div class="flex flex-col justify-center gap-8 h-full md:w-5/6">
-                    <h1 class="font-bold text-2xl md:text-4xl"> <span class="text-secondary-500" ref="typedRef"></span> <br> Be The Fastest In Delivering Your Product In <span class="text-secondary-500"> <br> Carrefour</span> </h1>
-                    <p class="text-gray-500 text-sm">Our job is to filling your satisfaction without do any effort and with fast and free delivery </p>
-                </div>
-                <div class="h-full flex items-center">
-                    <img src="@/assets/image/slider.png" alt="" class="md:block">
+        <div class="grid grid-cols-1 place-items-center w-5/6 mx-auto h-5/6 md:grid-cols-2">
+            <div class="flex flex-col justify-center gap-8 h-full md:w-5/6">
+                <h1 class="font-bold text-2xl md:text-4xl"> <span class="text-secondary-500" ref="typedRef"></span> <br> Be The Fastest In Delivering Your Product In <span class="text-secondary-500"> <br> Carrefour</span> </h1>
+                <p class="text-gray-500 text-sm"> Our job is to filling your satisfaction without do any effort and with fast and free delivery </p>
+                <div class="flex gap-4 items-center">
+                    <router-link to="/register" class="font-semibold text-white border-2 border-primary-700 bg-primary-700 hover:bg-primary-800 rounded-lg text-sm px-2 lg:px-5 py-2 lg:py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 " >Get Started</router-link>
+                    <router-link to="/login" class="font-semibold text-primary-700 border-2 border-primary-700 dark:text-white hover:bg-primary-700 hover:text-white rounded-lg text-sm px-2 lg:px-5 py-2 lg:py-2.5 dark:hover:bg-gray-700 ">STORE</router-link>
                 </div>
             </div>
+            <div class="h-full flex items-center">
+                <img src="@/assets/image/slider.png" alt="" class="md:block">
+            </div>
+        </div>
     </div>
 </template>
 
@@ -18,9 +22,10 @@
     import MyHeader from '@/components/header.vue' 
     // import hooks
     import { ref, onMounted } from 'vue';
-    // 
+    // import typed js library that write text
     import Typed from 'typed.js';
 
+    // ref is reference
     const typedRef = ref(null);
 
     // write text when rendring component
