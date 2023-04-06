@@ -50,7 +50,7 @@
 
 <script setup>
 // instance an object from store index that has all methodes "state management"
-import { userCounterStore } from '@/store/index'
+import { userCounterStore } from '@/store/home'
 // access the `store` variable anywhere in the component
 const store = userCounterStore();
 

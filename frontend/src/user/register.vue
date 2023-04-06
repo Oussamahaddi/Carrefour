@@ -6,7 +6,7 @@
 
         <div class="grid grid-cols-1 place-items-center items-end px-6 py-8 h-screen relative z-10 lg:grid-cols-2 md:px-12">
             <div class="hidden w-full items-center justify-center lg:flex">
-                <img src="@/assets/image/livraison_2-removebg-preview.png" alt="" class="w-3/6">
+                <img src="@/assets/image/delievry1.png" alt="" class="w-3/6">
             </div>
             <!-- form -->
             <div class="bg-white/60 border-2 border-gray-500/30 mix-blend-difference w-5/6 rounded-xl flex flex-col items-center py-4 justify-evenly max-sm:w-full lg:w-full lg:py-8">
@@ -95,7 +95,7 @@
 
 <script setup>
 // instance an object from store index that has all methodes "state management"
-import { userCounterStore } from '@/store/index'
+import { userCounterStore } from '@/store/home'
 // access the `store` variable anywhere in the component
 const store = userCounterStore();
 </script>
