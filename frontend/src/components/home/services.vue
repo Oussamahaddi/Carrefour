@@ -1,5 +1,5 @@
 <template>
-    <div class="my-20 w-5/6 mx-auto bg-[#FFEDF0] px-8 py-12 rounded-xl">
+    <div class="my-20 w-5/6 mx-auto bg-[#FFEDF0]/70 px-8 py-12 rounded-xl shadow-[0_0_10px] shadow-black/20">
         <div class="w-5/6 h-full relative hidden lg:block">
             <img src="@/assets/image/service/bg.png" alt="" class="absolute right-4 top-4 md:w-1/2">
         </div>

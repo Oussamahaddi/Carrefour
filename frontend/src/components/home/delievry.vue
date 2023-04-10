@@ -6,7 +6,7 @@
         </div>
         <div class="grid grid-cols-1 place-items-center gap-8 py-6 my-4 md:grid-cols-2 lg:grid-cols-3 w-11/12 mx-auto">
             <miniDelievry image="src/assets/lottiefile/order.json" title="Easy To Order" paragraph="You Only Need a few Steps in ordering Product" />
-            <miniDelievry image="src/assets/lottiefile/delivry.json" title="Fastest Delivery" paragraph="Delivery that is always ontime even faster." />
+            <miniDelievry image="https://assets9.lottiefiles.com/packages/lf20_oeo3imyf.json" title="Fastest Delivery" paragraph="Delivery that is always ontime even faster." />
             <miniDelievry image="src/assets/lottiefile/delivryDone.json" title="Best Quality" paragraph="N  ot Only fast for us quality is also number one." />
         </div>
     </div>

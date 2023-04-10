@@ -1,8 +1,8 @@
 <template>
-    <nav class="border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
-      <div class="flex md:flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+    <nav class="flex sticky top-0 z-30 w-full border-gray-200 px-4 lg:px-6 py-2.5">
+      <div class="flex md:flex-wrap justify-between items-center w-full">
         <router-link to="/">
-          <img src="@/assets/image/logo/IMAGE.png" class="mr-3 w-44" alt="Flowbite Logo" />
+          <img src="@/assets/image/logo/IMAGE.png" class="mr-3 w-44" alt="carrefour logo" />
         </router-link>
         <div class="flex items-center lg:order-2">
           <div class="p-2 rounded mr-4 text-white cursor-pointer bg-primary-700 hover:bg-primary-800 ">
@@ -22,30 +22,23 @@
             </svg>
           </button>
         </div>
-        <!-- drop down -->
-        <div :class="store.navVisibility ? 'block' : 'hidden'" class="justify-between items-center p-4 w-full lg:flex lg:w-auto lg:order-1 max-lg:absolute max-lg:top-16 max-lg:right-1/2 max-lg:translate-x-1/2 z-10" id="mobile-menu-2">
-          <ul class="flex flex-col font-medium lg:flex-row lg:space-x-8 lg:mt-0 max-lg:bg-white max-lg:rounded p-2">
-            <li>
-              <router-link to="" class="block py-2 pr-4 pl-3 font-semibold max-lg:text-white rounded bg-secondary-500 lg:bg-transparent text-secondary-500 lg:p-0">Why Carrefour</router-link>
-            </li>
-            <li>
-              <router-link to="" class="block py-2 pr-4 pl-3 font-semibold text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Our Product Carrefour</router-link>
-            </li>
-            <li>
-              <router-link to="" class="block py-2 pr-4 pl-3 font-semibold text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Marketplace</router-link>
-            </li>
-            <li>
-              <router-link to="" class="block py-2 pr-4 pl-3 font-semibold text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Contact</router-link>
-            </li>
-            <hr>
-            <li class="lg:hidden">
-              <router-link to="/login" class="block py-2 pr-4 pl-3 font-semibold text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Login</router-link>
-            </li>
-            <li class="lg:hidden">
-              <router-link to="/register" class="block py-2 pr-4 pl-3 font-semibold text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Register</router-link>
-            </li>
-          </ul>
-        </div>
+          <!-- drop down -->
+          <div :class="store.navVisibility ? 'block' : 'hidden'" class="justify-between items-center p-4 w-full lg:flex lg:w-auto lg:order-1 max-lg:absolute max-lg:top-16 max-lg:right-1/2 max-lg:translate-x-1/2 z-10" id="mobile-menu-2">
+            <!-- <div v-motion-slide-visible-bottom> -->
+              <ul class="flex flex-col font-medium lg:flex-row lg:space-x-8 lg:mt-0 max-lg:bg-white max-lg:rounded p-2">
+                <li v-for="link in store.links" :key="link.id">
+                  <router-link :to="link.url" @click="store.currentLink = link.id" :class="store.currentLink == link.id ? 'text-secondary-500 max-lg:text-white max-lg:bg-primary-700 relative lg:after:content-[\'\'] after:absolute md:after:bg-red-500 after:rounded-full after:w-[7px] after:aspect-square after:left-1/2 after:-bottom-4' : ''" class="block py-2 pr-4 pl-3 font-semibold rounded lg:p-0">{{ link.text }}</router-link>
+                </li>
+                <hr>
+                <li class="lg:hidden">
+                  <router-link to="/login" class="block py-2 pr-4 pl-3 font-semibold text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0">Login</router-link>
+                </li>
+                <li class="lg:hidden">
+                  <router-link to="/register" class="block py-2 pr-4 pl-3 font-semibold text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0">Register</router-link>
+                </li>
+              </ul>
+            <!-- </div> -->
+          </div>
       </div>
     </nav>
 </template>
@@ -55,5 +48,6 @@ import { Modal } from "flowbite";
 import { userCounterStore } from "@/store/home";
 
 const store = userCounterStore();
+
 
 </script>
