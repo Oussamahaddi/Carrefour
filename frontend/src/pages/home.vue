@@ -1,7 +1,7 @@
 <template>
-    <div class="h-screen bg-gradient-to-b from-primary-700/30 overflow-y-auto scrollbar-thumb-primary-700 scrollbar-track-secondary-500 scrollbar-thin">
+    <div class="h-screen bg-gradient-to-b from-primary-700/30 to-white overflow-y-auto scrollbar-thumb-primary-700 scrollbar-track-secondary-500 scrollbar-thin">
         <MyHeader />
-        <div class=" to-white">
+        <div class="">
             <div class="grid grid-cols-1 place-items-center w-5/6 mx-auto h-5/6 md:grid-cols-2">
                 <div class="flex flex-col justify-center gap-8 h-full md:w-5/6">
                     <h1 class="font-bold text-2xl md:text-4xl"> <span class="text-secondary-500" ref="typedRef"></span> <br> Be The Fastest In Delivering Your Product In <span class="text-secondary-500"> <br> Carrefour</span> </h1>
@@ -23,9 +23,9 @@
         <div v-motion-slide-visible-once-bottom > 
             <Categorie />
         </div>
-        <!-- <div v-motion-slide-visible-once-bottom >  -->
+        <div v-motion-slide-visible-once-bottom > 
             <Offre />
-        <!-- </div> -->
+        </div>
         <div v-motion-slide-visible-once-bottom > 
             <services />
         </div>

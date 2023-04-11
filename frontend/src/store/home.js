@@ -7,6 +7,7 @@ export const userCounterStore = defineStore("userCounterStore",{
         return {
             hidePwd: false,
             navVisibility: false,
+            cartVisibility : false,
             haha: true,
             currentLink : 1,
             links: [
@@ -27,7 +28,13 @@ export const userCounterStore = defineStore("userCounterStore",{
         },
         showNavbar() {
             this.navVisibility = !this.navVisibility;
-        }
+        },
+        handleCart() {
+            this.cartVisibility = !this.cartVisibility;
+        },
+        closeCart() {
+            this.cartVisibility = !this.cartVisibility;
+        },
     },
     mutations: {},
 });
