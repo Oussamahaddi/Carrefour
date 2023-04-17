@@ -3,13 +3,14 @@
         <Asidebar />
         <div class="relative overflow-y-auto scrollbar-thumb-primary-700 scrollbar-track-secondary-500 scrollbar-thin">
             <MyHeader class="w-11/12 mx-auto" />
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-11/12 mx-auto mt-14">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-11/12 mx-auto mt-8 bg-white/50 p-4 shadow-md rounded-xl">
                 <!-- items -->
-                <div id="music" class="allMusics relative bg-white shadow-md flex flex-col gap-3 rounded-md ">
-                    <div @click="deleteCategorie()" class="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 z-20 bg-white rounded-full cursor-pointer text-primary-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+                <div @click="store.showForm()" class="relative flex items-center justify-center h-48 bg-white text-primary-700 shadow-md rounded-md cursor-pointer hover:text-white hover:bg-primary-700 transition-all duration-500">
+                    <i class="fa-solid fa-plus text-4xl "></i>
+                </div>
+                <div v-for="i in 18" id="music" class="relative bg-white shadow-md flex flex-col gap-3 rounded-md cursor-pointer">
+                    <div @click="deleteCategorie()" class="shadow-md absolute  top-0 right-0 translate-x-1/2 -translate-y-1/2 z-20 w-8 aspect-square flex items-center justify-center bg-white rounded-full cursor-pointer text-red-500 hover:text-white hover:bg-primary-700 transition-all duration-500">
+                        <i class="fa-solid fa-x text-lg"></i>
                     </div>
                     <div class="overflow-hidden h-full ">
                         <img id="musicImg" class="w-full object-fill group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500" src="@/assets/image/categorie/IMAGE-1.png" alt=""/>
@@ -22,34 +23,45 @@
                         
                     </div>
                 </div>
+
+                <addForm :class="store.addProductFormVisibility ? 'block' : 'hidden'" >
+                    <div @click="store.hideForm()" class="absolute top-0 left-0 z-20 w-full h-full bg-black/40"></div>
+                </addForm>
+                
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-    import Asidebar from '@/components/dashboard/asidebar.vue';
-    import MyHeader from '@/components/dashboard/header.vue';
+// import components
+import Asidebar from '@/components/dashboard/asidebar.vue';
+import MyHeader from '@/components/dashboard/header.vue';
+import addForm from '@/components/dashboard/category/addForm.vue';
+import { userCounterStore } from '@/store/home';
 
-    function deleteCategorie() {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-            if (result.isConfirmed) {
-                console.log('deleted')
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
-            }
-        })
-    }
+const store = userCounterStore();
+
+function deleteCategorie() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            console.log('deleted')
+            Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+            )
+        }
+    })
+}
+
 
 </script>

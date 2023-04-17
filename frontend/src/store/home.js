@@ -12,6 +12,7 @@ export const userCounterStore = defineStore("userCounterStore",{
             navVisibility: false,
             cartVisibility : false,
             haha: true,
+            addProductFormVisibility : false,
             currentLink : 1,
             isLogged : useStorage('isLogged' , () => false),
             isAdmin : useStorage('isAdmin' , () => false),
@@ -39,6 +40,12 @@ export const userCounterStore = defineStore("userCounterStore",{
         },
         isActive(path) {
             return route.path === path
+        },
+        showForm() {
+            this.addProductFormVisibility = !this.addProductFormVisibility;
+        },
+        hideForm() {
+            this.addProductFormVisibility = false;
         },
         async logout() {
             this.isLogged = false;

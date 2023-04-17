@@ -87,7 +87,7 @@ async function login() {
         // console.log(response.data);
         if (response.data === 1) {
             isAdmin.value = true;
-            router.push('/statistique');
+            router.push('/admin/statistique');
             Swal.fire({
                 icon:'success',
                 title: `Welcome back`,

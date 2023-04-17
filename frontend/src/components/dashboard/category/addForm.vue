@@ -1,11 +1,11 @@
 <template>
     <div class="">
         <slot></slot>
-        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+        <div class="max-sm:w-11/12 w-4/6 lg:w-3/6 absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
             
-            <form action="" >
+            <form action="" class="">
                 <div class="-mx-3 md:flex mb-6">
-                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                    <div class="md:w-full px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
                             Category Name
                         </label>
@@ -35,5 +35,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+
 
 </script>
