@@ -15,7 +15,6 @@
                 <div class="mb-4">
                     <h2 class="text-3xl font-bold text-primary-700 drop-shadow-[0_4px_2px_rgba(0,0,0,0.25)]">Sign in</h2>
                 </div>
-                <button @click="test">test</button>
                 <form action="" @submit.prevent="login()" class="flex items-center justify-center w-full">
                     <div class="flex flex-col gap-4 items-center w-5/6">
                         <div class="w-full">

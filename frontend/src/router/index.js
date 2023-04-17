@@ -1,18 +1,22 @@
 import { createRouter, createWebHistory } from "vue-router";
-// pages
+
+// user pages
 import Home from "@/pages/home.vue";
 import Categories from "@/pages/categories.vue"
 import Store from "@/pages/store.vue";
 import Contact from "@/pages/contact.vue";
 import ProductDetail from "@/pages/productDetail.vue";
+
 // authentification
 import Login from "@/user/login.vue";
 import Register from "@/user/register.vue";
-// dashboard
+
+// admin dashboard
 import Statistique from "@/admin/statistique.vue"
 import Orders from "@/admin/orders.vue"
 import Products from "@/admin/products.vue"
 import Customers from "@/admin/customers.vue"
+import Category from "@/admin/category.vue"
 
 const routes = [
     {
@@ -41,22 +45,27 @@ const routes = [
         component: ProductDetail
     },
     {
-        path: '/statistique',
+        path: '/admin/statistique',
         name: "statistique",
         component: Statistique
     },
     {
-        path: '/orders',
+        path: '/admin/orders',
         name: "orders",
         component: Orders
     },
     {
-        path: '/products',
+        path: '/admin/products',
         name: "products",
         component: Products
     },
     {
-        path: '/customers',
+        path: '/admin/category',
+        name: "category",
+        component: Category
+    },
+    {
+        path: '/admin/customers',
         name: "customers",
         component: Customers
     },

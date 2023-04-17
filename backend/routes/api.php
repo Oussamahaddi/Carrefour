@@ -22,9 +22,6 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// login register 
-Route::post('/register', [RegisteredUserController::class, 'store']);
-Route::post('/login', [LoginController::class, 'login']);
 
 // protected route
 // Route::group(['middleware' => ['auth:sanctum']], function (Request $request) {

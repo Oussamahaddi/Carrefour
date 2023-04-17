@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('prixFinal');
             $table->string('prixOffre');
             $table->string('description');
-            $table->string('categorie');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

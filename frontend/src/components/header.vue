@@ -45,13 +45,15 @@
             <li v-if="store.isAdmin">
               <router-link to="/statistique" class="block py-2 pr-4 pl-3 font-semibold rounded lg:p-0">Dashboard</router-link>
             </li>
-            <hr>
-            <li class="lg:hidden">
-              <router-link to="/login" class="block py-2 pr-4 pl-3 font-semibold text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0">Login</router-link>
-            </li>
-            <li class="lg:hidden">
-              <router-link to="/register" class="block py-2 pr-4 pl-3 font-semibold text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0">Register</router-link>
-            </li>
+            <div v-if="!store.isLogged">
+              <hr>
+              <li class="lg:hidden">
+                <router-link to="/login" class="block py-2 pr-4 pl-3 font-semibold text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0">Login</router-link>
+              </li>
+              <li class="lg:hidden">
+                <router-link to="/register" class="block py-2 pr-4 pl-3 font-semibold text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0">Register</router-link>
+              </li>
+            </div>
           </ul>
         </div>
       </div>

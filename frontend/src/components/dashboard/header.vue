@@ -17,12 +17,11 @@
                 <div class="flex gap-4">
                     <img class="w-10 h-10 rounded-full" src="@/assets/image/avatar/avatar.png" alt="Rounded avatar">
                     <div>
-                        <strong class="">OussamaHaddi</strong>
-                        <p class="text-gray-500 text-sm">Admin</p>
+                        <strong class="hidden  md:block">OussamaHaddi</strong>
+                        <p class="hidden text-gray-500 text-sm md:block">Admin</p>
                     </div>
                 </div>
             </div>
-
         </header>
     </div>
 </template>
