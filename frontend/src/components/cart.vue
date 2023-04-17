@@ -106,9 +106,4 @@ import { userCounterStore } from "@/store/home";
 
 const store = userCounterStore();
 
-const test = () => {
-    console.log('test');
-}
-
-
 </script>

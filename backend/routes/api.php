@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// this route of sanctum authentication
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// login register 
+Route::post('/register', [RegisteredUserController::class, 'store']);
+Route::post('/login', [LoginController::class, 'login']);
+
+// protected route
+// Route::group(['middleware' => ['auth:sanctum']], function (Request $request) {
+//     Route::get('/logout', [LoginController::class, 'logout']);
+// });
+
+

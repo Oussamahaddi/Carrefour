@@ -11,8 +11,10 @@
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <SingleProduct v-for="i in 8" promo="false" :productImage="`src/assets/image/product/p${i}.png`" productName="Jus d'ananas frais 1L" productOffrePrice="10.99DH" productPrice="29.50DH" />
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <router-link  v-for="i in 8" to="/productDetail">
+                <SingleProduct promo="false" :productImage="`src/assets/image/product/p${i}.png`" productName="Jus d'ananas frais 1L" productOffrePrice="10.99DH" productPrice="29.50DH" />
+            </router-link>
         </div>
     </div>
 </template>

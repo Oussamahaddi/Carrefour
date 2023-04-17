@@ -1,5 +1,8 @@
 
 import { defineStore } from "pinia";
+import { useStorage } from '@vueuse/core'
+import router from "@/router";
+import axios from "axios";
 
 
 export const userCounterStore = defineStore("userCounterStore",{
@@ -10,6 +13,8 @@ export const userCounterStore = defineStore("userCounterStore",{
             cartVisibility : false,
             haha: true,
             currentLink : 1,
+            isLogged : useStorage('isLogged' , () => false),
+            isAdmin : useStorage('isAdmin' , () => false),
             links: [
                 { id: 1, url: "/", text: "Why Carrefour" },
                 { id: 2, url: "/categories", text: "Categories" },
@@ -23,9 +28,6 @@ export const userCounterStore = defineStore("userCounterStore",{
         showPwd() {
             this.hidePwd = !this.hidePwd;
         },
-        login() {
-            console.log('loged');
-        },
         showNavbar() {
             this.navVisibility = !this.navVisibility;
         },
@@ -35,6 +37,20 @@ export const userCounterStore = defineStore("userCounterStore",{
         closeCart() {
             this.cartVisibility = !this.cartVisibility;
         },
+        isActive(path) {
+            return route.path === path
+        },
+        async logout() {
+            this.isLogged = false;
+            this.isAdmin = false;
+            await axios.get('/sanctum/csrf-cookie');
+            try {
+                const response = await axios.post('/logout', {});
+                router.push('/');
+            } catch(error){
+                console.log(error);
+            }
+        }
     },
     mutations: {},
 });
