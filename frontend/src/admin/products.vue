@@ -3,8 +3,11 @@
         <Asidebar />
         <div class="relative overflow-y-auto scrollbar-thumb-primary-700 scrollbar-track-secondary-500 scrollbar-thin">
             <MyHeader class="w-11/12 mx-auto" />
-            <div class="relative shadow-md w-11/12 mx-auto mt-12">
-                <table class="bg-white rounded-md w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <div class="relative w-11/12 mx-auto mt-12 shadow-md bg-white rounded-md">
+                <div class=" text-primary-900 mt-8 py-4 px-4">
+                    <h3 class="font-semibold">Table Froma / User Data</h3>
+                </div>
+                <table class="shadow-md bg-white rounded-md w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-400 border-b border-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">

@@ -63,6 +63,8 @@ import router from '@/router';
 import { userCounterStore } from '@/store/home';
 import axios from 'axios';
 import { ref, reactive } from 'vue';
+import { toast } from 'vue3-toastify';
+
 // access the `store` variable anywhere in the component
 const store = userCounterStore();
 
@@ -88,17 +90,10 @@ async function login() {
         if (response.data === 1) {
             isAdmin.value = true;
             router.push('/admin/statistique');
-            Swal.fire({
-                icon:'success',
-                title: `Welcome back`,
-            })
         } else {
             router.push('/');
-            Swal.fire({
-                icon:'success',
-                title: `Welcome back`,
-            })
         }
+        toast.success('Welcome Back');
     } catch(error) {
         // errors.value.email = error.response.data.errors.email;
         // errors.value.password = error.response.data.errors.password;

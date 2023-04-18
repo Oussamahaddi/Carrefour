@@ -1,7 +1,7 @@
 <template>
     <div class="">
         <slot></slot>
-        <div class="max-sm:w-11/12 w-4/6 lg:w-3/6 absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+        <div class="max-sm:w-11/12 w-4/6 lg:w-3/6 fixed left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
             
             <form @submit.prevent="addCategorie" action="" method="POST" class="">
                 <div class="-mx-3 md:flex mb-6">
@@ -40,6 +40,7 @@
 <script setup>
 import axios from 'axios';
 import { ref } from 'vue';
+import { toast } from 'vue3-toastify';
 
 const data = ref({
     categoryName : '',
@@ -48,8 +49,6 @@ const data = ref({
 })
 
 const handleFileUpload = (e) => {
-
-    axios.defaults.withCredentials = false;
 
     const file = e.target.files[0];
     const formData = new FormData();
@@ -61,10 +60,14 @@ const handleFileUpload = (e) => {
 
 async function addCategorie() {
 
+    await axios.get('/sanctum/csrf-cookie');
+
+    axios.defaults.withCredentials = false;
+
     const responseImg = await axios.post('https://api.cloudinary.com/v1_1/dujpquv4d/upload', data.value.categoryImg)
     .catch(err => console.error(err.response));
 
-    await axios.get('/sanctum/csrf-cookie');
+    axios.defaults.withCredentials = true;
 
     try {
 
@@ -73,13 +76,13 @@ async function addCategorie() {
             description : data.value.categoryDescription,
             categorie_image : responseImg.data.secure_url,
         })
-        // console.log(response);
-        toast.success('Category deleted successfully!');
+        if (response.statusText === 'Created') {
+            toast.success('Category deleted successfully!');
+        }
 
     } catch(error) {
         console.log(error);
     }
-
 
 }
 

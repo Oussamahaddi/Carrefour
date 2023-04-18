@@ -1,7 +1,7 @@
 <template>
     <div class="">
         <slot></slot>
-        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+        <div class="max-sm:w-11/12 w-4/6 lg:w-3/6 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
             
             <form action="" >
                 <div class="-mx-3 md:flex mb-6">

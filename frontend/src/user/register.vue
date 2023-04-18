@@ -18,7 +18,7 @@
                         <div class="flex gap-4 w-full">
                             <!-- user name input -->
                             <div class="relative w-full">
-                                <div  :class="errors.nam ? 'border-2 border-red-500' : ''" class="shadow-[0_1px_3px] shadow-black/40 rounded-lg">
+                                <div  :class="errors.name ? 'border-2 border-red-500' : ''" class="shadow-[0_1px_3px] shadow-black/40 rounded-lg">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class=" absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 w-9 aspect-square">
                                         <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
                                     </svg>
@@ -111,6 +111,7 @@ import axios from 'axios';
 import router from '@/router';
 import { userCounterStore } from '@/store/home'
 import { ref, reactive } from 'vue';
+import { toast } from 'vue3-toastify';
 // access the `store` variable anywhere in the component
 const store = userCounterStore();
 
@@ -143,10 +144,7 @@ async function register() {
 
         router.push('/');
 
-        Swal.fire({
-            icon: "success",
-            title: `Register Succesfuly`,
-        });
+        toast.success('Register successfuly and logged in');
     } catch(error){
         errors.value = error.response.data.errors
         console.log(error);

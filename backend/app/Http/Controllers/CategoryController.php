@@ -14,6 +14,12 @@ class CategoryController extends Controller
     public function index()
     {
         //
+        $postPerPage = 5;
+        $category = Category::paginate($postPerPage);
+        return response()->json([
+            'categories' => $category, 
+            'page_count' => ceil(count(Category::all()) / $postPerPage)
+        ]);
     }
 
     /**
