@@ -43,7 +43,7 @@
               <router-link :to="link.url" @click="store.currentLink = link.id"  class="block py-2 pr-4 pl-3 font-semibold rounded lg:p-0">{{ link.text }}</router-link>
             </li>
             <li v-if="store.isAdmin">
-              <router-link to="/statistique" class="block py-2 pr-4 pl-3 font-semibold rounded lg:p-0">Dashboard</router-link>
+              <router-link to="/admin/statistique" class="block py-2 pr-4 pl-3 font-semibold rounded lg:p-0">Dashboard</router-link>
             </li>
             <div v-if="!store.isLogged">
               <hr>

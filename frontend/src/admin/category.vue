@@ -40,6 +40,9 @@ import MyHeader from '@/components/dashboard/header.vue';
 import addForm from '@/components/dashboard/category/addForm.vue';
 import { userCounterStore } from '@/store/home';
 
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 const store = userCounterStore();
 
 function deleteCategorie() {
@@ -53,12 +56,7 @@ function deleteCategorie() {
         confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
         if (result.isConfirmed) {
-            console.log('deleted')
-            Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-            )
+            toast.success('Category deleted successfully!');
         }
     })
 }
