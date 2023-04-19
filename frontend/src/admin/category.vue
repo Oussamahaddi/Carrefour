@@ -12,19 +12,21 @@
                 <div @click="store.showForm()" class="relative flex items-center justify-center h-48 bg-white text-primary-700 shadow-[0_0_10px] shadow-black/20 rounded-md cursor-pointer hover:text-white hover:bg-primary-700 transition-all duration-500">
                     <i class="fa-solid fa-plus text-4xl "></i>
                 </div>
-                <div v-for="category in allCategory" @click="showEditForm(category)" id="music" class="relative bg-white shadow-[0_0_10px] shadow-black/20 flex flex-col gap-3 rounded-md cursor-pointer">
+                <div v-for="category in allCategory" id="music" class="relative bg-white shadow-[0_0_10px] shadow-black/20 rounded-md cursor-pointer">
                     <!-- delete category btn -->
                     <div @click="deleteCategorie(category.id)" class="shadow-md absolute  top-0 right-0 translate-x-1/2 -translate-y-1/2 z-20 w-8 aspect-square flex items-center justify-center bg-white rounded-full cursor-pointer text-red-500 hover:text-white hover:bg-primary-700 transition-all duration-500">
                         <i class="fa-solid fa-trash"></i>
                     </div>
-                    <!-- category items -->
-                    <div class="overflow-hidden h-full ">
-                        <img id="musicImg" class="w-full h-full group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500" :src="category.categorie_image" alt=""/>
-                    </div>
-                    <div class="p-4 flex justify-between items-center gap-2 -mt-4">
-                        <div class="flex flex-col w-1/2">
-                            <h2 :title="category.categorie_name" class="text-primary-900 font-bold text-xl truncate">{{ category.categorie_name }}</h2>
-                            <p class="text-gray-400">Category</p>
+                    <div @click="showEditForm(category)" class="flex flex-col gap-3">
+                        <!-- category items -->
+                        <div class="overflow-hidden h-full ">
+                            <img id="musicImg" class="w-full h-full group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500" :src="category.categorie_image" alt=""/>
+                        </div>
+                        <div class="p-4 flex justify-between items-center gap-2 -mt-4">
+                            <div class="flex flex-col w-1/2">
+                                <h2 :title="category.categorie_name" class="text-primary-900 font-bold text-xl truncate">{{ category.categorie_name }}</h2>
+                                <p class="text-gray-400">Category</p>
+                            </div>
                         </div>
                     </div>
                 </div>

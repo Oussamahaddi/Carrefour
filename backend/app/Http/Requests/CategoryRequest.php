@@ -11,7 +11,7 @@ class CategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,9 +23,9 @@ class CategoryRequest extends FormRequest
     {
         return [
             //
-            'category_name' => 'required|max:255',
+            'categorie_name' => 'required|max:255',
             'description' => 'required|string',
-            'image' => 'nullable|image',
+            'categorie_image' => 'required|string',
         ];
     }
 }

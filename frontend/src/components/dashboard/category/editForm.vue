@@ -81,7 +81,7 @@ async function sendEdit(img) {
         if (response.status === 200) {
             props.showAllCategory();
             props.hideEditForm();
-            toast.success('Category has been Edit successfully!');
+            toast.success('Category has been Updated successfully!');
         }
     } catch (error) {
         console.log(error);

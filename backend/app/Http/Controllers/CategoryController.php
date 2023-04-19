@@ -6,6 +6,7 @@ use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Resources\CategoryResource;
+use Illuminate\Auth\Events\Validated;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class CategoryController extends Controller
@@ -18,8 +19,10 @@ class CategoryController extends Controller
         //
         $postPerPage = 8;
         $category = Category::paginate($postPerPage);
+        $allCategory = Category::all();
         return response()->json([
             'categories' => $category, 
+            'allCategory' => $allCategory,
             'page_count' => ceil(count(Category::all()) / $postPerPage)
         ]);
     }
@@ -27,16 +30,17 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         //
-        $field = $request->validate([
-            'categorie_name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'categorie_image' => 'required|string',
-        ]);
-        $category = Category::create($field);
-        return new CategoryResource($category);
+        // $field = $request->validate([
+        //     'categorie_name' => 'required|string|max:255',
+        //     'description' => 'required|string',
+        //     'categorie_image' => 'required|string',
+        // ]);
+        $validation = $request->Validated();
+        Category::create($validation);
+        return response()->json(['message' => 'created']);
     }
 
     /**
@@ -50,16 +54,11 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
         //
-        // $category = Category::find($id);
-        $field = $request->validate([
-            'categorie_name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'categorie_image' => 'sometimes|string',
-        ]);
-        $category->update($field);
+        $validation = $request->validated();
+        $category->update($validation);
         return new CategoryResource($category);
     }
 
