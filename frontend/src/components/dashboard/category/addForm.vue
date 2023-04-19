@@ -41,6 +41,10 @@
 import axios from 'axios';
 import { ref } from 'vue';
 import { toast } from 'vue3-toastify';
+import { defineProps , onMounted } from 'vue';
+import { userCounterStore } from '@/store/home';
+
+const store = userCounterStore();
 
 const data = ref({
     categoryName : '',
@@ -60,8 +64,6 @@ const handleFileUpload = (e) => {
 
 async function addCategorie() {
 
-    await axios.get('/sanctum/csrf-cookie');
-
     axios.defaults.withCredentials = false;
 
     const responseImg = await axios.post('https://api.cloudinary.com/v1_1/dujpquv4d/upload', data.value.categoryImg)
@@ -70,14 +72,15 @@ async function addCategorie() {
     axios.defaults.withCredentials = true;
 
     try {
-
         const response = await axios.post('/api/category', {
             categorie_name : data.value.categoryName,
             description : data.value.categoryDescription,
             categorie_image : responseImg.data.secure_url,
         })
         if (response.statusText === 'Created') {
-            toast.success('Category deleted successfully!');
+            props.showAllCategory();
+            store.addProductFormVisibility = false;
+            toast.success('Category Add successfully!');
         }
 
     } catch(error) {
@@ -86,6 +89,12 @@ async function addCategorie() {
 
 }
 
+const props = defineProps({
+    showAllCategory : {
+        type : Function,
+        required : true,
+    }
+})
 
 
 </script>

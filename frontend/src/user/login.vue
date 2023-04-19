@@ -79,7 +79,7 @@ const isLogged = useStorage('isLogged');
 const isAdmin = useStorage('isAdmin');
 
 async function login() {
-    await axios.get("/sanctum/csrf-cookie");
+
     try {
         const response = await axios.post('/login', {
             email : email.value,

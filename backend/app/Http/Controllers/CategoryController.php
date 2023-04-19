@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Resources\CategoryResource;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CategoryController extends Controller
 {
@@ -14,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $postPerPage = 5;
+        $postPerPage = 8;
         $category = Category::paginate($postPerPage);
         return response()->json([
             'categories' => $category, 
@@ -28,7 +30,12 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
-        $category = Category::create($request->all());
+        $field = $request->validate([
+            'categorie_name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'categorie_image' => 'required|string',
+        ]);
+        $category = Category::create($field);
         return new CategoryResource($category);
     }
 
@@ -43,9 +50,17 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
     {
         //
+        // $category = Category::find($id);
+        $field = $request->validate([
+            'categorie_name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'categorie_image' => 'sometimes|string',
+        ]);
+        $category->update($field);
+        return new CategoryResource($category);
     }
 
     /**
@@ -54,5 +69,8 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         //
+        $category = Category::find($id);
+        $category->delete();
+        return response('deleted');
     }
 }

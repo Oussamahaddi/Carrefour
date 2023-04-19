@@ -129,7 +129,7 @@ const fields = ref({
 const errors = ref({});
 
 async function register() {
-    await axios.get('/sanctum/csrf-cookie');
+
     try {
         const response = await axios.post('/register', {
             name : fields.value.name,

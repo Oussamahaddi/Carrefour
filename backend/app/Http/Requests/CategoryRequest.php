@@ -23,6 +23,9 @@ class CategoryRequest extends FormRequest
     {
         return [
             //
+            'category_name' => 'required|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image',
         ];
     }
 }

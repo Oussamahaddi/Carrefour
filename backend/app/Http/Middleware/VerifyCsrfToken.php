@@ -15,6 +15,6 @@ class VerifyCsrfToken extends Middleware
     protected $addHttpCookie = true;
 
     protected $except = [
-        'category', 'register', 'login'
+        
     ];
 }
