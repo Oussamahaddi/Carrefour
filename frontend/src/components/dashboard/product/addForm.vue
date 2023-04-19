@@ -71,7 +71,7 @@
                             </label>
                             <select v-model="store.data.category_id" class="block w-full appearance-none bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" >
                                 <optgroup label="Select Category">
-                                    <option v-for="category in categories" :value="category.id">{{ category.categorie_name }}</option>
+                                    <option v-for="category in store.allCategories" :value="category.id">{{ category.categorie_name }}</option>
                                 </optgroup>
                             </select>
                         </div>

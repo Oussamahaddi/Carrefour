@@ -1,6 +1,7 @@
 import axios from "axios";
 import { defineStore } from "pinia";
 import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 
 export const adminProduct = defineStore("adminProduct",{
@@ -77,6 +78,23 @@ export const adminProduct = defineStore("adminProduct",{
                 console.log(error.response.data);
             }
 
+        },
+        deleteProduct(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You wont to Delete this Product ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(`/api/product/${id}`);
+                    this.showAllProduct();
+                    toast.success('Product deleted successfully!');
+                }
+            })
         }
     },
     mutations: {},
