@@ -41,9 +41,12 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductRequest $request, Product $product)
     {
         //
+        $validation = $request->validated();
+        $product->update($validation);
+        return response($request);
     }
 
     /**

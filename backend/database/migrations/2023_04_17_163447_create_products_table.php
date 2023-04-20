@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('prixAchat');
             $table->string('prixFinal');
             $table->string('prixOffre');
+            $table->integer('product_quantite');
             $table->string('description');
             $table->string('product_image');
             $table->foreignId('category_id')->constrained()->onDelete('cascade')->onUpdate('cascade');

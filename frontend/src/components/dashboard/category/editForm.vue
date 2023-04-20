@@ -66,7 +66,7 @@ async function editCategorie() {
         axios.defaults.withCredentials = true;
         sendEdit(responseImg.data.secure_url);
     } else {
-        sendEdit(props.formData.categorie_image);
+        sendEdit(props.formData.category_image);
     }
 }
 
@@ -102,6 +102,7 @@ const props = defineProps({
         required : true,
     }
 });
+
 
 
 </script>

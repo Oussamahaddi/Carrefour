@@ -8,6 +8,10 @@ export const adminProduct = defineStore("adminProduct",{
     state: () => {
         return {
             addProductFormVisibility : false,
+            editProductFormVisibility : false,
+            allProduct : [],
+            allCategories : [],
+            imageChanger : false,
             data : {
                 product_name : '',
                 reference : '',
@@ -18,9 +22,9 @@ export const adminProduct = defineStore("adminProduct",{
                 description : '',
                 product_image : '',
                 category_id : '',
-                allProduct : null,
-                allCategories : null,
-            }
+                product_quantite : null,
+            },
+            dataEdit : {},
         };
     },
     getters: {},
@@ -28,10 +32,17 @@ export const adminProduct = defineStore("adminProduct",{
         showForm() {
             this.addProductFormVisibility = !this.addProductFormVisibility;
         },
+        showEditForm(productInfo) {
+            this.dataEdit = productInfo;
+            this.editProductFormVisibility = !this.editProductFormVisibility;
+        },
         hideForm() {
             this.addProductFormVisibility = false;
+            this.editProductFormVisibility = false;
         },
         handleFileUpload(e) {
+
+            this.imageChanger = true;
 
             const file = e.target.files[0];
             const formData = new FormData();
@@ -42,10 +53,11 @@ export const adminProduct = defineStore("adminProduct",{
         },
         async showAllProduct() {
             try {
-                await axios.get('/api/products').then(response => {
-                    this.allProduct = response.data;
-                    console.log(this.allProduct);
-                })
+                // ghir bach lcode yt9ra mzn
+                // hadi kat extracti data mn response w katsmiha product
+                const {data:products}= await axios.get('/api/products')
+                this.allProduct = products
+
             } catch(error) {
                 console.log(error);
             }
@@ -79,6 +91,29 @@ export const adminProduct = defineStore("adminProduct",{
             }
 
         },
+        async editProduct() {
+
+            if (this.imageChanger) {
+                axios.defaults.withCredentials = false;
+                const responseImg = await axios.post('https://api.cloudinary.com/v1_1/dujpquv4d/upload', this.data.product_image)
+                .catch(err => console.error(err.response));
+                this.dataEdit.product_image = responseImg.data.secure_url; 
+                axios.defaults.withCredentials = true;
+            }
+
+            try {
+                const response = await axios.put(`/api/products/${this.dataEdit.id}`, this.dataEdit);
+                console.log(response);
+                this.showAllProduct();
+                this.editProductFormVisibility = false;
+                toast.success('Product has been Updated successfully!');
+
+                this.imageChanger = false;
+            } catch (error) {
+                console.log(error.response);
+            }
+
+        },
         deleteProduct(id) {
             Swal.fire({
                 title: 'Are you sure?',
@@ -90,7 +125,7 @@ export const adminProduct = defineStore("adminProduct",{
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.delete(`/api/product/${id}`);
+                    axios.delete(`/api/products/${id}`);
                     this.showAllProduct();
                     toast.success('Product deleted successfully!');
                 }

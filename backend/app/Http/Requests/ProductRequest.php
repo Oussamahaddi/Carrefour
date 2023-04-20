@@ -26,13 +26,14 @@ class ProductRequest extends FormRequest
             'product_name' => 'required|string',
             'reference' => 'required|string',
             'libelle' => 'required|string',
-            'codeBare' => ['required', 'string', Rule::unique('products', 'codeBare')],
+            'codeBare' => ['required', 'string'],
             'prixAchat' => 'required|string',
             'prixFinal' => 'required|string',
             'prixOffre' => 'required|string',
             'description' => 'required|string',
             'category_id' => 'required',
             'product_image' => 'required|string',
+            'product_quantite' => 'required',
         ];
     }
 }

@@ -2,7 +2,6 @@
     <div class="">
         <slot></slot>
         <div class="w-5/6 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
-            
             <form action="" @submit.prevent="store.addProduct()" class="">
                 <div class="h-80 grid md:grid-cols-1 lg:grid-cols-2 gric-rows-[1fr_auto] gap-8 mx-auto overflow-hidden overflow-y-auto scrollbar-hide">
 
@@ -64,6 +63,12 @@
                                 </label>
                                 <input v-model="store.data.prixFinal" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"  type="text" placeholder="Final Price">
                             </div>
+                            <div class="md:w-1/2 px-3">
+                                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-zip">
+                                    Quantite
+                                </label>
+                                <input v-model="store.data.product_quantite" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"  type="text" placeholder="Product quantite">
+                            </div>
                         </div>
                         <div class="mb-2 w-full mx-auto">
                             <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-zip">
@@ -97,8 +102,6 @@
 <script setup>
 import { adminProduct } from '@/store/product';
 import { ref , onMounted } from 'vue';
-
-const categories = ref();
 
 const store = adminProduct();
 

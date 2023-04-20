@@ -3,7 +3,7 @@
         <Asidebar />
         <div class="relative overflow-y-auto scrollbar-thumb-primary-700 scrollbar-track-secondary-500 scrollbar-thin">
             <MyHeader class="w-11/12 mx-auto" />
-            <div class="relative w-11/12 mx-auto mt-12 shadow-md bg-white rounded-md  overflow-x-auto scrollbar-thumb-primary-700 scrollbar-track-secondary-500 scrollbar-thin">
+            <div class="relative w-11/12 mx-auto mt-12 p-4 shadow-md bg-white rounded-md  overflow-x-auto scrollbar-thumb-primary-700 scrollbar-track-secondary-500 scrollbar-thin">
                 <div class=" text-primary-900 mt-8 py-4 px-4">
                     <h3 class="font-semibold">Table Froma / User Data</h3>
                 </div>
@@ -37,9 +37,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="product in store.allProduct" class="music bg-transparent hover:bg-gray-200/20 cursor-pointer">
+                        <tr @dblclick="store.showEditForm(product)" v-for="product in store.allProduct" class="music bg-transparent hover:bg-gray-200/20 cursor-pointer">
                             <td class="flex gap-4 items-center justify-center font-bold ">
-                                <img :src="product.product_image" alt="" class="musicImg w-14">
+                                <img :src="product.product_image" alt="" class="musicImg w-14 aspect-square object-contain">
                                 <p>{{ product.product_name }} </p>
                             </td>
                             <td class="album px-6 font-semibold">
@@ -87,6 +87,10 @@
             <addForm :class="store.addProductFormVisibility ? 'block' : 'hidden'" >
                 <div @click="store.hideForm()" class="fixed top-0 left-0 w-full h-full bg-black/40"></div>
             </addForm>
+            
+            <editForm :class="store.editProductFormVisibility ? 'block' : 'hidden'" >
+                <div @click="store.hideForm()" class="fixed top-0 left-0 w-full h-full bg-black/40"></div>
+            </editForm>
 
         </div>
     </div>
@@ -96,14 +100,17 @@
 
 import Asidebar from '@/components/dashboard/asidebar.vue';
 import MyHeader from '@/components/dashboard/header.vue';
-import addForm from '@/components/dashboard/product/addForm.vue'
+import addForm from '@/components/dashboard/product/addForm.vue';
+import editForm from '@/components/dashboard/product/editForm.vue';
 
-import { ref, onMounted } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 
 import { adminProduct } from '@/store/product';
 
 const store = adminProduct();
 
-onMounted(store.showAllProduct);
+onBeforeMount(async ()=>{
+    await store.showAllProduct()
+});
 
 </script>
