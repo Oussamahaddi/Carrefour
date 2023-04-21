@@ -15,7 +15,8 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $products = Product::all();
+        // $products = Product::all();
+        $products = Product::with('category')->get();
         return response($products);
     }
 
@@ -35,7 +36,9 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // search by name of product 
+        $products = Product::with('category')->find($id);
+        return response($products);
     }
 
     /**

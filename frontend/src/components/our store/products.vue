@@ -12,8 +12,14 @@
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <router-link  v-for="i in 8" to="/productDetail">
-                <SingleProduct promo="false" :productImage="`src/assets/image/product/p${i}.png`" productName="Jus d'ananas frais 1L" productOffrePrice="10.99DH" productPrice="29.50DH" />
+            <router-link v-for="product in store.filterProductByCategory" :to="`/productDetail/${product.id}`">
+                <SingleProduct 
+                    :promo="false" 
+                    :productImage="product.product_image" 
+                    :productName="product.product_name" 
+                    :productOffrePrice="product.prixOffre + 'DH' || null" 
+                    :productPrice="product.prixAchat + 'DH' || null" 
+                />
             </router-link>
         </div>
     </div>
@@ -22,4 +28,13 @@
 <script setup>
 import offre from '@/components/home/offre.vue';
 import SingleProduct from '../home/singleProduct.vue';
+import { outStore } from '@/store/outStore';
+import { ref , onMounted } from 'vue';
+
+const store = outStore();
+
+onMounted(() => {
+    store.showAllProduct()
+})
+
 </script>

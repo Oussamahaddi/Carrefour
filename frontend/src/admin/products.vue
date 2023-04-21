@@ -54,9 +54,9 @@
                             <td class="date px-6 font-semibold">
                                 {{ product.prixFinal }}
                             </td><td class="date px-6 font-semibold">
-                                {{ product.prixFinal }}
+                                {{ product.product_quantite }}
                             </td><td class="date px-6 font-semibold">
-                                {{ product.prixFinal }}
+                                {{ product.category.categorie_name }}
                             </td>
                             <td class="duration px-6 flex">
                                 <button  class="font-semibold text-green-500 text-center mr-6">

@@ -15,7 +15,7 @@ class ProductResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'product_name' => $this->name,
+            'product_name' => $this->product_name,
             'reference' => $this->reference,
             'libelle' => $this->libelle,
             'codeBare' => $this->codeBare,
@@ -27,6 +27,7 @@ class ProductResource extends JsonResource
             'image_url' => $this->image ? url($this->image) : null,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'category_name' => $request->category->category_name,
         ];
     }
 }

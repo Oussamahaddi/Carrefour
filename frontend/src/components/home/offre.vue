@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <singleProduct v-for="product in obj.products" :promo="false" :product-name="product.name" :product-image="product.img" :product-price="product.sellingPrice" :product-offre-price="product.offrePrice" class="" />
+            <singleProduct v-for="product in obj.products" :promo="true" :product-name="product.name" :product-image="product.img" :product-price="product.sellingPrice" :product-offre-price="product.offrePrice" class="" />
         </div>
     </div>
 </template>

@@ -40,7 +40,7 @@ const routes = [
         component: Contact
     },
     {
-        path: '/productDetail',
+        path: '/productDetail/:id',
         name: "productDetail",
         component: ProductDetail
     },

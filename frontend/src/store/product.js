@@ -57,6 +57,7 @@ export const adminProduct = defineStore("adminProduct",{
                 // hadi kat extracti data mn response w katsmiha product
                 const {data:products}= await axios.get('/api/products')
                 this.allProduct = products
+                console.log(this.allProduct);
 
             } catch(error) {
                 console.log(error);
