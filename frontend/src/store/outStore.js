@@ -1,5 +1,7 @@
+import { useStorage } from "@vueuse/core";
 import axios from "axios";
 import { defineStore } from "pinia";
+import { useRoute } from "vue-router";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 
@@ -65,16 +67,7 @@ export const outStore = defineStore("outStore",{
             try {
                 const {data:response} = await axios.get(`/api/products/${id}`)
                 this.singleProduct = response;
-                console.log(this.singleProduct);
-            } catch(error) {
-                console.log(error);
-            }
-        },
-        async addToCart() {
-            try {
-                const {data:response} = await axios.post(`/api/products/${id}`)
-                this.singleProduct = response;
-                console.log(this.singleProduct);
+                // console.log(this.singleProduct);
             } catch(error) {
                 console.log(error);
             }

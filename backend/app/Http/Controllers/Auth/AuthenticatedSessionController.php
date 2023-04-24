@@ -19,7 +19,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return response($request->user()->role);
+        return response($request->user());
     }
 
     /**

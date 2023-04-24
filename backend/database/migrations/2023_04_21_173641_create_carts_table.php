@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('product_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('product_qte');
             $table->timestamps();
         });
     }

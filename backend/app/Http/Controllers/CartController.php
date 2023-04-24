@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CartRequest;
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Requests\CartRequest;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -21,23 +23,37 @@ class CartController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Cart $cart)
     {
         //
-        // $data = [
-        //     'user_id' => auth()->user()->id,
-        //     'product_id' => 2,
-        // ];
-        // Cart::create($data);
-        return response(auth()->id());
+        $check = $cart->all()->where('product_id', $request->product_id)->first();
+        if ($check) {
+            $check->update([
+                'product_qte' => $check->product_qte + (int)$request->product_qte,
+            ]);
+        } else {
+            Cart::create([
+                'product_id' => (int)$request->product_id,
+                'product_qte' => (int)$request->product_qte,
+                'user_id' => (int)$request->user_id,
+            ]);
+        }
+        return response('Add to cart successfuly');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
         //
+        $cart = DB::table('carts')
+                            ->select('carts.*', 'products.product_name', 'products.product_image', 'products.prixAchat')
+                            ->join('users', 'carts.user_id' , '=', 'users.id')
+                            ->join('products', 'carts.product_id', '=', 'products.id')
+                            ->where('users.id', '=', (int)$id)
+                            ->get();
+        return response($cart);
     }
 
     /**
@@ -54,5 +70,8 @@ class CartController extends Controller
     public function destroy(string $id)
     {
         //
+        $cart = Cart::find($id);
+        $cart->delete();
+        return response('item deleted');
     }
 }

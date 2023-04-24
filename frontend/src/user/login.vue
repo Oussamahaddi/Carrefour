@@ -77,6 +77,7 @@ const errors = ref({
 
 const isLogged = useStorage('isLogged');
 const isAdmin = useStorage('isAdmin');
+const isUser = useStorage('isUser');
 
 async function login() {
 
@@ -86,8 +87,9 @@ async function login() {
             password : password.value,
         })
         isLogged.value = true;
+        isUser.value = response.data.id;
         // console.log(response.data);
-        if (response.data === 1) {
+        if (response.data.role === 1) {
             isAdmin.value = true;
             router.push('/admin/statistique');
         } else {
@@ -95,6 +97,7 @@ async function login() {
         }
         toast.success('Welcome Back');
     } catch(error) {
+        console.log(error.response);
         // errors.value.email = error.response.data.errors.email;
         // errors.value.password = error.response.data.errors.password;
     }

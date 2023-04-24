@@ -24,16 +24,16 @@
                 </div>
                 <div>
                     <div class="flex items-center">
-                        <button @click="minus" :class="counter == 1 ? 'bg-gray-200 cursor-not-allowed' : ''" class="bg-white shadow-[0_2px_4px] shadow-black/30 rounded-xl px-3 flex items-center justify-center text-xl py-1 font-bold">-</button>
-                        <input type="number" v-model="counter" name="" id="" class="bg-transparent text-center w-14 border-none focus:ring-0 appearance-none" style="-moz-appearance: textfield; -webkit-appearance: textfield;">
+                        <button @click="minus" :class="counter == 1 ? 'text-gray-400 cursor-not-allowed' : ''" class="bg-white shadow-[0_2px_4px] shadow-black/30 rounded-xl px-3 flex items-center justify-center text-xl py-1 font-bold">-</button>
+                        <input type="number"  v-model="counter" class="bg-transparent text-center w-14 border-none focus:ring-0 appearance-none" style="-moz-appearance: textfield; -webkit-appearance: textfield;">
                         <button @click="plus" :class="counter == store.singleProduct.product_quantite ? 'bg-gray-600 cursor-not-allowed' : '' " class="bg-black shadow-[0_2px_4px] shadow-black/30 text-white px-3 flex items-center justify-center text-xl py-1 font-bold rounded-xl">+</button>
                     </div>
                 </div>
 
                 <div class="flex gap-4 items-center">
-                    <div>
-                        <button @click="store.addToCart" type="submit" class="bg-white rounded-xl text-black font-semibold shadow-[0_2px_4px] shadow-black/30 border-none py-2 px-4 flex gap-4 items-center transition-all duration-500 hover:bg-gray-100">ADD TO CART</button>
-                    </div>
+                    <form action="" @submit.prevent="addToCart" method="POST">
+                            <button type="submit" class="bg-white rounded-xl text-black font-semibold shadow-[0_2px_4px] shadow-black/30 border-none py-2 px-4 flex gap-4 items-center transition-all duration-500 hover:bg-gray-100">ADD TO CART</button>
+                    </form>
                     <div>
                         <button type="button" class="bg-blue-700 py-2 px-4 rounded-xl font-semibold shadow-[0_2px_4px] shadow-black/30 flex gap-4 items-center border-none transition-all duration-500 text-white hover:bg-blue-800">Buy Now</button>
                     </div>
@@ -55,14 +55,20 @@ import MyHeader from '@/components/header.vue'
 import MyFooter from '@/components/footer.vue'
 import { useRoute } from "vue-router";
 import { ref, onMounted } from 'vue'
+import { useStorage } from '@vueuse/core';
+import router from '@/router';
 
 import { outStore } from '@/store/outStore';
+import { userCounterStore } from '@/store/home';
+import { toast } from 'vue3-toastify';
 
 const store = outStore();
+const cartStore = userCounterStore();
 
 const counter = ref(1);
 
 const id = useRoute().params.id;
+const userId = useStorage('isUser').value;
 
 const plus = () => {
     counter.value >= store.singleProduct.product_quantite ? store.singleProduct.product_quantite : counter.value++ ;
@@ -70,6 +76,25 @@ const plus = () => {
 const minus = () => {
     counter.value--
     counter.value < 1 ? counter.value = 1 : counter.value;
+};
+
+// add to cart
+const addToCart = async () => {
+    if (!cartStore.isLogged) {
+        router.push('/login');
+    } else {
+        try {
+            const { data: response } = await axios.post(`/api/cart/`, {
+                user_id: userId,
+                product_qte: counter.value,
+                product_id : id,
+            })
+            cartStore.getAllCart();
+            toast.success('Product add to cart success');
+        } catch (error) {
+            console.log(error.response);
+        }
+    }
 };
 
 

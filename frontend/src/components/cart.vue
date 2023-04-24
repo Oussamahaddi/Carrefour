@@ -34,28 +34,27 @@
                                         <div class="flow-root">
                                             <ul role="list" class="-my-6 divide-y divide-gray-200">
                                                 <!-- items  -->
-                                                <li v-for="i in 5" class="flex py-6">
+                                                <li v-for="item in store.cartItems" class="flex py-6">
                                                     <div
                                                         class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                                        <img src="@/assets/image/product/p4.png" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="h-full w-full object-cover object-center" />
+                                                        <img :src="item.product_image" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="h-full w-full object-cover object-center" />
                                                     </div>
 
-                                                    <div class="ml-4 flex flex-1 flex-col">
+                                                    <div class="ml-4 flex flex-1 flex-col justify-around">
                                                         <div>
                                                             <div class="flex justify-between text-base font-medium text-gray-900">
-                                                                <h3>
-                                                                    <a href="#">Throwback Hip Bag</a>
+                                                                <h3 class="font-semibold">
+                                                                    {{ item.product_name }}
                                                                 </h3>
-                                                                <p class="ml-4">$90.00</p>
+                                                                <p class="ml-4 font-semibold">{{ item.prixAchat * item.product_qte }}DH</p>
                                                             </div>
-                                                            <p class="mt-1 text-sm text-gray-500">Salmon</p>
                                                         </div>
-                                                        <div class="flex flex-1 items-end justify-between text-sm">
-                                                            <p class="text-gray-500">Qty 1</p>
+                                                        <div class="flex items-end justify-between text-sm">
+                                                            <p class="text-gray-500">{{ item.product_qte }}</p>
 
                                                             <div class="flex">
-                                                                <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                                                    Remove
+                                                                <button @click="store.deleteItemCart(item.id)" type="button" class="font-semibold text-red-500 hover:text-indigo-500">
+                                                                    Remove {{ item.id }}
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -71,14 +70,15 @@
                                 <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
                                     <div class="flex justify-between text-base font-medium text-gray-900">
                                         <p>Subtotal</p>
-                                        <p>$262.00</p>
+                                        <p>{{ store.totalPrice() }}DH</p>
                                     </div>
                                     <p class="mt-0.5 text-sm text-gray-500">
                                         Shipping and taxes calculated at checkout.
                                     </p>
                                     <div class="mt-6">
-                                        <a href="#"
-                                            class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
+                                        <router-link to="/checkout" @click="store.closeCart()" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+                                            Checkout
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -92,9 +92,13 @@
 
 <script setup>
 
-
+import { onMounted } from "vue";
 import { userCounterStore } from "@/store/home";
 
 const store = userCounterStore();
+
+onMounted(() => {
+    store.getAllCart();
+})
 
 </script>
