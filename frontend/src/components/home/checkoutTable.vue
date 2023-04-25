@@ -24,13 +24,9 @@
                     </td>
                     <td class="px-6 font-semibold">
                         <div class="flex items-center">
-                            <button @click="minus(cart.product_qte)"
-                                class="bg-white shadow-[0_2px_4px] shadow-black/30 rounded-xl px-2 text-xl font-bold">-</button>
-                            <input type="number" v-model="cart.product_qte"
-                                class="bg-transparent text-center w-14 border-none focus:ring-0 appearance-none"
-                                style="-moz-appearance: textfield; -webkit-appearance: textfield;">
-                            <button @click="plus(cart.product_qte)"
-                                class="bg-black shadow-[0_2px_4px] shadow-black/30 text-white px-2  text-xl font-bold rounded-xl">+</button>
+                            <button @click="store.minus(cart.product_qte, cart.id, cart.product_quantite)" class="bg-white shadow-[0_2px_4px] shadow-black/30 rounded-xl px-2 text-xl font-bold">-</button>
+                            <input type="number" v-model="cart.product_qte" class="bg-transparent text-center w-14 border-none focus:ring-0 appearance-none" style="-moz-appearance: textfield; -webkit-appearance: textfield;">
+                            <button @click="store.plus(cart.product_qte, cart.id, cart.product_quantite)" class="bg-black shadow-[0_2px_4px] shadow-black/30 text-white px-2  text-xl font-bold rounded-xl">+</button>
                         </div>
                     </td>
                     <td class="date px-6 font-semibold">
@@ -54,10 +50,14 @@
 
 <script setup>
 
-    const props = defineProps({
-        cartItems : {
-            type : Array,
-            required : true,
-        }
-    });
+import { userCounterStore } from "@/store/home";
+
+const store = userCounterStore();
+
+const props = defineProps({
+    cartItems : {
+        type : Array,
+        required : true,
+    }
+});
 </script>

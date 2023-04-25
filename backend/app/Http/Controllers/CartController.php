@@ -16,7 +16,10 @@ class CartController extends Controller
     public function index()
     {
         //
-        $cart = Cart::all();
+        $cart = DB::table('carts')
+                    ->select('carts.*', 'products.product_quantite')
+                    ->join('products', 'carts.product_id', '=', 'products.id')
+                    ->get();
         return response($cart);
     }
 
@@ -48,7 +51,7 @@ class CartController extends Controller
     {
         //
         $cart = DB::table('carts')
-                            ->select('carts.*', 'products.product_name', 'products.product_image', 'products.prixAchat')
+                            ->select('carts.*', 'products.product_name', 'products.product_image', 'products.prixAchat', 'products.product_quantite')
                             ->join('users', 'carts.user_id' , '=', 'users.id')
                             ->join('products', 'carts.product_id', '=', 'products.id')
                             ->where('users.id', '=', (int)$id)
@@ -62,6 +65,11 @@ class CartController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $cart = Cart::find($id);
+        $cart->update([
+            'product_qte' => $request->product_qte
+        ]);
+        return response('updated');
     }
 
     /**

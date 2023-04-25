@@ -21,6 +21,7 @@ import Customers from "@/admin/customers.vue"
 import Category from "@/admin/category.vue"
 
 const isAdmin = useStorage("isAdmin");
+const isLogged = useStorage("isLogged");
 
 // console.log(isAdmin.value);
 
@@ -49,6 +50,9 @@ const routes = [
         path: '/checkout',
         name: "checkout",
         component: Checkout,
+        meta: {
+            isLogged : true
+        }
     },
     {
         path: '/productDetail/:id',
@@ -60,7 +64,7 @@ const routes = [
         name: "statistique",
         component: Statistique,
         meta : {
-            isAdmin : isAdmin.value
+            isAdmin : true
         }
     },
     {
@@ -68,7 +72,7 @@ const routes = [
         name: "orders",
         component: Orders,
         meta : {
-            isAdmin : isAdmin.value
+            isAdmin : true
         }
     },
     {
@@ -76,7 +80,7 @@ const routes = [
         name: "products",
         component: Products,
         meta : {
-            isAdmin : isAdmin.value
+            isAdmin : true
         }
     },
     {
@@ -84,7 +88,7 @@ const routes = [
         name: "category",
         component: Category,
         meta : {
-            isAdmin : isAdmin.value
+            isAdmin : true
         }
     },
     {
@@ -92,7 +96,7 @@ const routes = [
         name: "customers",
         component: Customers,
         meta : {
-            isAdmin : isAdmin.value
+            isAdmin : true
         }
     },
     {
@@ -112,16 +116,22 @@ const router = createRouter({
     routes,
 });
 
-// router.beforeEach((to, from, next) => {
-//     if (to.meta.isAdmin) {
-//         next();
-//     } else {
-//         if (to.path === "/") {
-//             next();
-//         } else {
-//             next("/")
-//         }
-//     }
-// })
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.isAdmin)) {
+        if (isAdmin.value == 'false') {
+            next('/login');
+        } else {
+            next();
+        }
+    } else if (to.matched.some(record => record.meta.isLogged)) {
+        if (isLogged.value == 'false') {
+            next('/login');
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
+})
 
 export default router;

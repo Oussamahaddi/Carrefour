@@ -5,7 +5,7 @@
             Promo
         </div>
         <div class="flex items-center justify-center h-64 py-4">
-            <img :src="productImage" alt="" class="relative z-10 group-hover:scale-110 group-hover:transition-all group-hover:duration-500 w-5/6">
+            <img :src="productImage" alt="" class="relative z-10 group-hover:scale-110 group-hover:transition-all group-hover:duration-500 w-5/6 ">
         </div>
         <div class="bg-gray-700 py-2 rounded-xl text-white text-center w-full relative z-10">
             <h4 class="text-md font-semibold">{{productName}}</h4>

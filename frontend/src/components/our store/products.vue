@@ -21,6 +21,9 @@
                     :productPrice="product.prixAchat + 'DH' || null" 
                 />
             </router-link>
+            <div v-if="store.productPending" v-for="i in 4" class="animate-pulse h-80 bg-primary-200 relative p-2 flex flex-col items-center rounded-xl ">
+                <div class="h-full"></div>
+            </div>
         </div>
     </div>
 </template>

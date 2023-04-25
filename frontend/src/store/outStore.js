@@ -9,11 +9,14 @@ import "vue3-toastify/dist/index.css";
 export const outStore = defineStore("outStore",{
     state: () => {
         return {
+            
             allProduct : [],
             categories : [],
             category_id : '',
             searchByName : '',
             singleProduct : '',
+            productPending : false,
+            catPending : false,
         };
     },
     getters: {
@@ -41,11 +44,14 @@ export const outStore = defineStore("outStore",{
     actions: {
         async allCategories() {
             try {
+                this.catPending = true;
                 await axios.get('/api/category').then(response => {
                     this.categories = response.data.allCategory;
                 })
             } catch (error) {
                 console.log(error);
+            }  finally {
+                this.catPending = false
             }
         },
         getProductByCategory(id) {
@@ -53,6 +59,7 @@ export const outStore = defineStore("outStore",{
         },
         async showAllProduct() {
             try {
+                this.productPending = true;
                 // ghir bach lcode yt9ra mzn
                 // hadi kat extracti data mn response w katsmiha product
                 const {data:products}= await axios.get('/api/products')
@@ -61,15 +68,20 @@ export const outStore = defineStore("outStore",{
 
             } catch(error) {
                 console.log(error);
+            } finally {
+                this.productPending = false;
             }
         },
         async getProductId(id) {
             try {
+                this.productPending = true;
                 const {data:response} = await axios.get(`/api/products/${id}`)
                 this.singleProduct = response;
                 // console.log(this.singleProduct);
             } catch(error) {
                 console.log(error);
+            } finally {
+                this.productPending = false;
             }
         },
     },

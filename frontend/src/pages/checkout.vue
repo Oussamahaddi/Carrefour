@@ -4,7 +4,7 @@
         <MyHeader />
         <div class="w-11/12 mx-auto my-12">
             <div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 place-items-center">
+                <div v-if="store.checkCartItemLength" class="grid grid-cols-1 md:grid-cols-2 gap-8 place-items-center">
                     
                     <div class="">
                         <button @click="back()" class="mb-12 text-primary-800">
@@ -38,14 +38,6 @@ import router from '@/router';
 
 const store = userCounterStore();
 const counter = ref();
-
-const plus = () => {
-    // counter.value >= outSotre.singleProduct.product_quantite ? outSotre.singleProduct.product_quantite : counter.value++;
-};
-const minus = (counter) => {
-    counter--
-    counter < 1 ? counter = 1 : counter;
-};
 
 const back = () => {
     router.back()

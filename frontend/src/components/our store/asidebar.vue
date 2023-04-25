@@ -8,6 +8,9 @@
                 <li v-for="category in store.categories" @click="store.getProductByCategory(category.id)" class="p-2 cursor-pointer border-b border-black/20 hover:bg-gray-200 flex items-center gap-2">
                     <img :src="category.categorie_image" alt="" class="w-12 aspect-square"> {{ category.categorie_name }}
                 </li>
+                <li v-for="i in 8" v-if="store.catPending" class="animate-pulse h-20 p-2 cursor-pointer border-b bg-primary-200">
+                    <div class="h-full"></div>
+                </li>
             </ul>
         </div>
     </div>

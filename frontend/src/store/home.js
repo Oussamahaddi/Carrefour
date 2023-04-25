@@ -25,6 +25,7 @@ export const userCounterStore = defineStore("userCounterStore",{
                 { id: 4, url: "/contact", text: "Contact" },
             ],
             cartItems : [],
+            // checkCartItemLength : false,
         };
     },
     getters: {},
@@ -68,7 +69,9 @@ export const userCounterStore = defineStore("userCounterStore",{
                 try {
                     const {data:response} = await axios.get('/api/cart/' + id);
                     this.cartItems = response;
-                    console.log(this.cartItems);
+                    if (this.cartItems.length > 0) {
+                        this.checkCartItemLength = true;
+                    }
                 } catch(error){
                     console.log(error);
                 }
@@ -86,6 +89,48 @@ export const userCounterStore = defineStore("userCounterStore",{
                 const {data:response} = axios.delete(`/api/cart/${id}`);
                 this.getAllCart();
                 toast.success('Item delete successfuly');
+            } catch(err) {
+                console.log(err.response);
+            }
+        },
+        async plus(newQte, id, productQte) {
+            // console.log(newQte++, id);
+            if (newQte < productQte) {
+                newQte++
+                try {
+                    const response = await axios.put(`/api/cart/${id}`, {
+                        product_qte : newQte,
+                    });
+                    this.getAllCart();
+                } catch(err) {
+                    console.log(err.response);
+                }
+            } else {
+                toast.error('full stock');
+            }
+        },
+        async minus(newQte, id) {
+            if (newQte > 1) {
+                newQte--;
+                try {
+                    const response = await axios.put(`/api/cart/${id}`, {
+                        product_qte : newQte,
+                    });
+                    this.getAllCart();
+                } catch(err) {
+                    console.log(err.response);
+                }
+            }
+        },
+        async orderNow() {
+            try {
+                const {data:response} = await axios.post('/api/order', {
+                    fields : this.cartItems,
+                    total_price_order : this.totalPrice(),
+                    user_id : this.isUser,
+                });
+                this.getAllCart();
+                toast.success('Order Succe');
             } catch(err) {
                 console.log(err.response);
             }
