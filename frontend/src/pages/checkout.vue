@@ -4,7 +4,7 @@
         <MyHeader />
         <div class="w-11/12 mx-auto my-12">
             <div>
-                <div v-if="store.checkCartItemLength" class="grid grid-cols-1 md:grid-cols-2 gap-8 place-items-center">
+                <div v-if="store.checkCartItemLength" class="grid grid-cols-1 md:grid-cols-2 gap-8 ">
                     
                     <div class="">
                         <button @click="back()" class="mb-12 text-primary-800">
@@ -18,6 +18,16 @@
                     </div>
                     <div class="w-5/6 mx-auto">
                         <CartPayment />
+                    </div>
+                </div>
+                <div v-else>
+                    <div class="flex justify-center mt-6">
+                        <div class="text-primary-900 flex flex-col items-center gap-8">
+                            <img src="" alt="" class="w-24">
+                            <h3 class="text-3xl font-bold">Start Shop your first product now</h3>
+                            <p class="text-gray-500">It easy to do that , we will help you</p>
+                            <router-link to="/store"><button class="text-white bg-primary-500 font-semibold hover:scale-110 rounded-full text-sm px-5 py-3 mr-2 mb-2 ">Create a Playlist</button></router-link>
+                        </div>
                     </div>
                 </div>
             </div>

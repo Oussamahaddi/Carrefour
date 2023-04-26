@@ -25,7 +25,7 @@ export const userCounterStore = defineStore("userCounterStore",{
                 { id: 4, url: "/contact", text: "Contact" },
             ],
             cartItems : [],
-            // checkCartItemLength : false,
+            checkCartItemLength : false,
         };
     },
     getters: {},
@@ -69,6 +69,7 @@ export const userCounterStore = defineStore("userCounterStore",{
                 try {
                     const {data:response} = await axios.get('/api/cart/' + id);
                     this.cartItems = response;
+                    // console.log(this.cartItems.length);
                     if (this.cartItems.length > 0) {
                         this.checkCartItemLength = true;
                     }

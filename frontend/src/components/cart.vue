@@ -54,7 +54,7 @@
 
                                                             <div class="flex">
                                                                 <button @click="store.deleteItemCart(item.id)" type="button" class="font-semibold text-red-500 hover:text-indigo-500">
-                                                                    Remove {{ item.id }}
+                                                                    Remove
                                                                 </button>
                                                             </div>
                                                         </div>

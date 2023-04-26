@@ -48,7 +48,6 @@
                 </div>
 
                 <div class="text-sm grid gap-2">
-                    <div> <strong>Categorie :</strong> {{ store.singleProduct.category }}</div>
                     <div> <strong>Available :</strong> {{ store.singleProduct.product_quantite }} Product in stock </div>
                 </div>
             </div>

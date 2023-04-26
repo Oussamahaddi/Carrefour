@@ -77,7 +77,7 @@ export const outStore = defineStore("outStore",{
                 this.productPending = true;
                 const {data:response} = await axios.get(`/api/products/${id}`)
                 this.singleProduct = response;
-                // console.log(this.singleProduct);
+                // console.log(this.singleProduct.category.categorie_name);
             } catch(error) {
                 console.log(error);
             } finally {

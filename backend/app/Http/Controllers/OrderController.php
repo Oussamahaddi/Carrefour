@@ -15,6 +15,8 @@ class OrderController extends Controller
     public function index()
     {
         //
+        $orders = Order::with('orderProduct')->get();
+        return response($orders);
     }
 
     /**
@@ -57,6 +59,16 @@ class OrderController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $order = Order::find($id);
+        
+        // $order->update([
+        //     'status' => '',
+        //     'sendingDate' => $request->sendingDate
+        // ]);
+        $order->status = $request->status;
+        $order->sendingDate = $request->sendingDate;
+        $order->update();
+        return response($order);
     }
 
     /**

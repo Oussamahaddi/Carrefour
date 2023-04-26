@@ -2,7 +2,7 @@ import axios from "axios";
 import { defineStore } from "pinia";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
-
+import moment from 'moment';
 
 export const adminProduct = defineStore("adminProduct",{
     state: () => {
@@ -11,6 +11,7 @@ export const adminProduct = defineStore("adminProduct",{
             editProductFormVisibility : false,
             allProduct : [],
             allCategories : [],
+            allOrders : [],
             imageChanger : false,
             data : {
                 product_name : '',
@@ -72,6 +73,39 @@ export const adminProduct = defineStore("adminProduct",{
                 console.log(error);
             }
         },
+        async showAllOrders() {
+            try {
+                const {data:response} = await axios.get('/api/order');
+                this.allOrders = response;
+            } catch (error) {
+                console.log(error.response);
+            }
+        },
+        async acceptOrder(id) {
+            try {
+                const sendingDate = moment().add(2, 'days').format('YYYY-MM-DD');
+                const {data:response} = await axios.put('/api/order/' + id, {
+                    status: 'accepted',
+                    sendingDate : sendingDate,
+                });
+                this.showAllOrders();
+                toast.success('Order Accepted');
+                console.log(response);
+            } catch (error) {
+                console.log(error.response);
+            }
+        },
+        async refuseOrder(id) {
+            try {
+                const {data:response} = await axios.put('/api/order/' + id, {
+                    status: 'refused',
+                });
+                this.showAllOrders();
+                toast.error('Order Refused');
+            } catch (error) {
+                console.log(error.response);
+            }
+        },
         async addProduct() {
 
             axios.defaults.withCredentials = false;
@@ -86,14 +120,12 @@ export const adminProduct = defineStore("adminProduct",{
                 this.showAllProduct();
                 this.addProductFormVisibility = false;
                 toast.success('Product Created successfuly');
-
             } catch(error) {
                 console.log(error.response.data);
             }
 
         },
         async editProduct() {
-
             if (this.imageChanger) {
                 axios.defaults.withCredentials = false;
                 const responseImg = await axios.post('https://api.cloudinary.com/v1_1/dujpquv4d/upload', this.data.product_image)
@@ -101,19 +133,16 @@ export const adminProduct = defineStore("adminProduct",{
                 this.dataEdit.product_image = responseImg.data.secure_url; 
                 axios.defaults.withCredentials = true;
             }
-
             try {
                 const response = await axios.put(`/api/products/${this.dataEdit.id}`, this.dataEdit);
                 console.log(response);
                 this.showAllProduct();
                 this.editProductFormVisibility = false;
                 toast.success('Product has been Updated successfully!');
-
                 this.imageChanger = false;
             } catch (error) {
                 console.log(error.response);
             }
-
         },
         deleteProduct(id) {
             Swal.fire({

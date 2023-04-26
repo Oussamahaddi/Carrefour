@@ -13,4 +13,8 @@ class Order extends Model
         'total_price_order',
         'user_id',
     ];
+
+    public function orderProduct() {
+        return $this->hasMany(OrderProduct::class, 'order_id');
+    }
 }
