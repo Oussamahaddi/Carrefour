@@ -47,6 +47,7 @@ export const outStore = defineStore("outStore",{
                 this.catPending = true;
                 await axios.get('/api/category').then(response => {
                     this.categories = response.data.allCategory;
+                    // console.log(this.categories[0].categorie_name);
                 })
             } catch (error) {
                 console.log(error);

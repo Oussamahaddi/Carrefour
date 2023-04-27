@@ -35,8 +35,7 @@
                                             <ul role="list" class="-my-6 divide-y divide-gray-200">
                                                 <!-- items  -->
                                                 <li v-for="item in store.cartItems" class="flex py-6">
-                                                    <div
-                                                        class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                                    <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                                         <img :src="item.product_image" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="h-full w-full object-cover object-center" />
                                                     </div>
 

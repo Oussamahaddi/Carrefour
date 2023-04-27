@@ -51,6 +51,8 @@ class OrderController extends Controller
     public function show(string $id)
     {
         //
+        $userOrders = Order::where('user_id',$id)->get();
+        return response($userOrders);
     }
 
     /**
@@ -77,5 +79,8 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         //
+        $order = Order::find($id);
+        $order->delete();
+        return response('item deleted successfuly');
     }
 }

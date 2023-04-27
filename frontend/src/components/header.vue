@@ -42,6 +42,9 @@
             <li v-for="link in store.links" :key="link.id" @click="store.showNavbar" :class="{'text-secondary-500 max-lg:text-white max-lg:bg-primary-700 relative lg:after:content-[\'\'] after:absolute lg:after:bg-red-500 after:rounded-full after:w-[7px] after:aspect-square after:left-1/2 after:-bottom-4' : isActive(link.url) }">
               <router-link :to="link.url" @click="store.currentLink = link.id"  class="block py-2 pr-4 pl-3 font-semibold rounded lg:p-0">{{ link.text }}</router-link>
             </li>
+            <li v-if="store.isLogged" :class="{ 'text-secondary-500 max-lg:text-white max-lg:bg-primary-700 relative lg:after:content-[\'\'] after:absolute lg:after:bg-red-500 after:rounded-full after:w-[7px] after:aspect-square after:left-1/2 after:-bottom-4': isActive('/myorder') }">
+              <router-link to="/myorder" class="block py-2 pr-4 pl-3 font-semibold rounded lg:p-0">My Orders</router-link>
+            </li>
             <li v-if="store.isAdmin">
               <router-link to="/admin/statistique" class="block py-2 pr-4 pl-3 font-semibold rounded lg:p-0">Dashboard</router-link>
             </li>

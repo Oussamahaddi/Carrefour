@@ -131,11 +131,12 @@ export const userCounterStore = defineStore("userCounterStore",{
                     user_id : this.isUser,
                 });
                 this.getAllCart();
+                router.push('/myorder');
                 toast.success('Order Succe');
             } catch(err) {
                 console.log(err.response);
             }
-        }
+        },
     },
     mutations: {},
 });

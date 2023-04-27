@@ -8,6 +8,7 @@ import Store from "@/pages/store.vue";
 import Contact from "@/pages/contact.vue";
 import ProductDetail from "@/pages/productDetail.vue";
 import Checkout from "@/pages/Checkout.vue";
+import MyOrder from "@/pages/myorder.vue";
 
 // authentification
 import Login from "@/user/login.vue";
@@ -58,6 +59,14 @@ const routes = [
         path: '/productDetail/:id',
         name: "productDetail",
         component: ProductDetail
+    },
+    {
+        path: '/myorder',
+        name: "myorder",
+        component: MyOrder,
+        meta : {
+            isLogged : true
+        }
     },
     {
         path: '/admin/statistique',
